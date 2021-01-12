@@ -1,18 +1,16 @@
 #include "matrix.h"
 AbstractMatrix::AbstractMatrix(int row, int columns)
 {
-	std::unique_ptr<vectorMatrix> tempMatrix(new vectorMatrix(row, std::vector<int>(columns)));
+	std::unique_ptr<vectorMatrix> tempMatrix(new vectorMatrix(row, std::vector<int>(columns))); // Выделение памяти под матрицу
     m_matrix = std::move(tempMatrix);
-
-
 }
 
 Matrix::Matrix(int row, int columns) : AbstractMatrix(row,columns)
 {      
     std::random_device rd;
     std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist(-9,9);
-	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it) {
+    std::uniform_int_distribution<int> dist(-9,9);  // генерация рандомных чисел в диапазоне [-9;9]
+	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it) {  //заполнение матрицы случайными числами
 		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
 			*it2 = dist(mt);
 		}
@@ -20,7 +18,7 @@ Matrix::Matrix(int row, int columns) : AbstractMatrix(row,columns)
 }
 std::ostream& operator<< (std::ostream& out, const AbstractMatrix& matrix)
 {
-	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) {
+	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) { //Вывод матрицы в поток
 		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
 			out << *it2;
 			if (it2 != (*it).end() - 1)
@@ -33,7 +31,7 @@ std::ostream& operator<< (std::ostream& out, const AbstractMatrix& matrix)
 std::istream& operator>> (std::istream& in, AbstractMatrix& matrix)
 {
 	
-	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) {
+	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) { //Считывание матрицы из потока
 		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
 			in >> *it2;			
 		}
@@ -42,6 +40,7 @@ std::istream& operator>> (std::istream& in, AbstractMatrix& matrix)
 }
 void Matrix::print()
 {
+	// Внешний вид вывода матрицы в консоль
 	int numberRow = 0;
 	std::cout << "  ";
 	for (auto it2 = (*m_matrix)[0].begin(); it2 != (*m_matrix)[0].end(); ++it2)
@@ -53,6 +52,7 @@ void Matrix::print()
 		std::cout << '-';
 	std::cout << std::endl;
 	numberRow = 0;
+	// 
 	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it) 
 	{
 		std::cout << numberRow++ << '|';
@@ -69,9 +69,9 @@ void Matrix::print()
 }
 void Matrix::transpose()
 {
-	int columns = m_matrix->size();
+	int columns = m_matrix->size(); //получение размеров транспонированной матрицы
 	int row = m_matrix->at(0).size();
-	std::unique_ptr<vectorMatrix> tempMatrix(new vectorMatrix(row, std::vector<int>(columns)));
+	std::unique_ptr<vectorMatrix> tempMatrix(new vectorMatrix(row, std::vector<int>(columns))); //создание временной матрицы
 	for (int i = 0; i < row; i++)
 	{
 		for (int j = 0; j < columns; j++)
