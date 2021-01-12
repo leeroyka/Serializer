@@ -8,6 +8,11 @@ int main()
     std::cout << std::endl;
     abs->transpose();
     abs->print();
-    Serializer::Serialization(abs,"test");
+    Serializer::Serialization(abs,"e:\\data.bin");
+
+    std::shared_ptr<AbstractMatrix> abs2(new Matrix(4, 3));
+
+    Serializer::Deserialization(abs2, "e:\\data.bin");
+    abs2->print();
     return 0;
 }
