@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.19)
+project(Serializer)
+add_library(lib STATIC matrix.cpp serializer.cpp)
+add_executable(serializer main.cpp) 
+target_link_libraries(serializer lib)
