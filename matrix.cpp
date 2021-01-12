@@ -65,7 +65,7 @@ void Matrix::print()
 		}
 		std::cout << std::endl;
 	}
-	std::cout << std::endl;
+	std::cout << std::endl << std::endl;
 }
 void Matrix::transpose()
 {
