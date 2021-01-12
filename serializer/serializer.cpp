@@ -1,4 +1,4 @@
-#include "serializer.h"
+#include "serializer.hpp"
 
 void Serializer::Serialization(std::shared_ptr<AbstractMatrix> matrix, std::string path)
 {

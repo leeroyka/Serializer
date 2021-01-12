@@ -1,7 +1,7 @@
 #include <memory>
 #include <fstream>
 #include <string>
-#include "matrix.h"
+#include "../matrix/matrix.hpp"
 
 class Serializer
 {
