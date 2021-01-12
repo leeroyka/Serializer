@@ -32,7 +32,7 @@ std::ostream& operator<< (std::ostream& out, const AbstractMatrix& matrix)
 }
 std::istream& operator>> (std::istream& in, AbstractMatrix& matrix)
 {
-	//try
+	
 	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) {
 		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
 			in >> *it2;			
@@ -42,12 +42,30 @@ std::istream& operator>> (std::istream& in, AbstractMatrix& matrix)
 }
 void Matrix::print()
 {
-	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it) {
-		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
+	int numberRow = 0;
+	std::cout << "  ";
+	for (auto it2 = (*m_matrix)[0].begin(); it2 != (*m_matrix)[0].end(); ++it2)
+	{
+		std::cout << ' ' << numberRow++<<' ';
+	}
+	std::cout << std::endl;
+	for (int i=0;i<(*m_matrix)[0].size() * 3+2;i++)
+		std::cout << '-';
+	std::cout << std::endl;
+	numberRow = 0;
+	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it) 
+	{
+		std::cout << numberRow++ << '|';
+		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) 
+		{
+			if (*it2 >= 0)
+				std::cout << ' ';
 			std::cout << *it2 << ' ';
+
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
 void Matrix::transpose()
 {

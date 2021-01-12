@@ -11,7 +11,7 @@ void Serializer::Deserialization(std::shared_ptr<AbstractMatrix> matrix, std::st
 {
 	std::ifstream fin(path);
 	if (!fin.is_open())
-		std::cout << "Kek ;c \n";
+		std::cout << "File not found ;c \n";
 	else
 	{
 		fin >> *matrix;
