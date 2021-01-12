@@ -1,18 +1,13 @@
-
 #include "serializer.h"
-
 int main()
 {
-    std::shared_ptr<AbstractMatrix> abs(new Matrix(3, 4));
-    abs->print();
-    std::cout << std::endl;
-    abs->transpose();
-    abs->print();
-    Serializer::Serialization(abs,"e:\\data.bin");
-
-    std::shared_ptr<AbstractMatrix> abs2(new Matrix(4, 3));
-
-    Serializer::Deserialization(abs2, "e:\\data.bin");
-    abs2->print();
+    std::shared_ptr<AbstractMatrix> matrixFirst(new Matrix(3, 4));
+    matrixFirst->print();
+    matrixFirst->transpose();
+    matrixFirst->print();
+    Serializer::Serialization(matrixFirst,"e:\\data.bin");
+    std::shared_ptr<AbstractMatrix> matrixSecond(new Matrix(4, 3));
+    Serializer::Deserialization(matrixSecond, "e:\\data.bin");
+    matrixSecond->print();
     return 0;
 }
