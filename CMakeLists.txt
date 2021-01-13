@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.19)
 project(Serializer)
-set(SOURCE_LIB matrix/matrix.cpp matrix/matrix.hpp serializer/serializer.hpp serializer/serializer.cpp)	
+file(GLOB SOURCE_LIB */*.*pp)
 add_library(lib STATIC ${SOURCE_LIB})
 add_executable(serializer main.cpp) 
 target_link_libraries(serializer lib)
