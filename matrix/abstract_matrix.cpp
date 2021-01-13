@@ -6,11 +6,12 @@ AbstractMatrix::AbstractMatrix(int row, int columns)
 }
 std::ostream& operator<< (std::ostream& out, const AbstractMatrix& matrix)
 {
-	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) { //Output matrix to stream
-		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
-			out << *it2;
-			if (it2 != (*it).end() - 1)
-				out << ' ';
+	
+	for (auto& it : *matrix.m_matrix) //Output matrix to stream
+	{
+		for (auto& it2 : it)
+		{
+			out << it2 << ' ';
 		}
 		out << '\n';
 	}
@@ -20,9 +21,12 @@ std::ostream& operator<< (std::ostream& out, const AbstractMatrix& matrix)
 std::istream& operator>> (std::istream& in, AbstractMatrix& matrix)
 {
 	
-	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) { //Reading matrix from stream
-		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
-			in >> *it2;			
+	
+	for (auto& it : *matrix.m_matrix) //Reading matrix from stream
+	{
+		for (auto& it2 : it)
+		{
+			in >> it2;
 		}
 	}
 	return in;

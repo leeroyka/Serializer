@@ -5,9 +5,11 @@ Matrix::Matrix(int row, int columns) : AbstractMatrix(row,columns)
     std::random_device rd;
     std::mt19937 mt(rd());
     std::uniform_int_distribution<int> dist(-9,9);  // generate random number [-9;9]
-	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it) { //Fill matrix
-		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
-			*it2 = dist(mt);
+	for (auto& it : *m_matrix) //Fill matrix
+	{
+		for (auto &it2 : it)
+		{
+			it2 = dist(mt);
 		}
 	}
 }
