@@ -1,43 +1,17 @@
 #include "matrix.hpp"
-AbstractMatrix::AbstractMatrix(int row, int columns)
-{
-	std::unique_ptr<vectorMatrix> tempMatrix(new vectorMatrix(row, std::vector<int>(columns))); // memory allocation for matrix
-    m_matrix = std::move(tempMatrix);
-}
 
 Matrix::Matrix(int row, int columns) : AbstractMatrix(row,columns)
 {      
     std::random_device rd;
     std::mt19937 mt(rd());
     std::uniform_int_distribution<int> dist(-9,9);  // generate random number [-9;9]
-	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it) {  //Fill matrix
+	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it) { //Fill matrix
 		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
 			*it2 = dist(mt);
 		}
 	}
 }
-std::ostream& operator<< (std::ostream& out, const AbstractMatrix& matrix)
-{
-	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) { //Output matrix to stream
-		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
-			out << *it2;
-			if (it2 != (*it).end() - 1)
-				out << ' ';
-		}
-		out << '\n';
-	}
-	return out;
-}
-std::istream& operator>> (std::istream& in, AbstractMatrix& matrix)
-{
-	
-	for (auto it = (*matrix.m_matrix).begin(); it != (*matrix.m_matrix).end(); ++it) { //Reading matrix from stream
-		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
-			in >> *it2;			
-		}
-	}
-	return in;
-}
+
 void Matrix::print()
 {
 	// Output design
@@ -53,18 +27,19 @@ void Matrix::print()
 	std::cout << std::endl;
 	numberRow = 0;
 	// 
-	for (auto it = (*m_matrix).begin(); it != (*m_matrix).end(); ++it)
+
+	for (auto it : *m_matrix)
 	{
 		std::cout << numberRow++ << '|';
-		for (auto it2 = (*it).begin(); it2 != (*it).end(); ++it2) 
+		for (auto it2 : it)
 		{
-			if (*it2 >= 0)
+			if(it2>=0)
 				std::cout << ' ';
-			std::cout << *it2 << ' ';
-
+			std::cout << it2 << ' ';
 		}
 		std::cout << std::endl;
 	}
+
 	std::cout << std::endl << std::endl;
 }
 void Matrix::transpose()
